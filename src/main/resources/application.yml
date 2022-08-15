@@ -1,0 +1,10 @@
+server:
+  port: 10086
+camunda:
+  bpm:
+    admin-user:
+      id: demo
+      password: demo
+      first-name: demo
+    filter:
+      create: All task

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_08vnbpq" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.1.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.17.0">
+    <bpmn:process id="Process_15vn21w" isExecutable="true">
+        <bpmn:startEvent id="StartEvent_1">
+            <bpmn:outgoing>Flow_1vrpna9</bpmn:outgoing>
+        </bpmn:startEvent>
+        <bpmn:sequenceFlow id="Flow_1vrpna9" sourceRef="StartEvent_1" targetRef="Activity_0vw8zj7" />
+        <bpmn:userTask id="Activity_0vw8zj7" name="发起人" camunda:assignee="${userOne}">
+            <bpmn:incoming>Flow_1vrpna9</bpmn:incoming>
+            <bpmn:outgoing>Flow_1aibci0</bpmn:outgoing>
+        </bpmn:userTask>
+        <bpmn:sequenceFlow id="Flow_1aibci0" sourceRef="Activity_0vw8zj7" targetRef="Activity_1ufqz5t" />
+        <bpmn:userTask id="Activity_1ufqz5t" name="经理审批" camunda:assignee="${userTwo}">
+            <bpmn:incoming>Flow_1aibci0</bpmn:incoming>
+            <bpmn:outgoing>Flow_1tcrokr</bpmn:outgoing>
+        </bpmn:userTask>
+        <bpmn:endEvent id="Event_1xlif2q">
+            <bpmn:incoming>Flow_0om0jg6</bpmn:incoming>
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow id="Flow_1tcrokr" sourceRef="Activity_1ufqz5t" targetRef="Activity_1xxhtsu" />
+        <bpmn:sequenceFlow id="Flow_0om0jg6" sourceRef="Activity_1xxhtsu" targetRef="Event_1xlif2q" />
+        <bpmn:userTask id="Activity_1xxhtsu" name="暂停">
+            <bpmn:incoming>Flow_1tcrokr</bpmn:incoming>
+            <bpmn:outgoing>Flow_0om0jg6</bpmn:outgoing>
+        </bpmn:userTask>
+    </bpmn:process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+        <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_15vn21w">
+            <bpmndi:BPMNEdge id="Flow_1tcrokr_di" bpmnElement="Flow_1tcrokr">
+                <di:waypoint x="660" y="120" />
+                <di:waypoint x="840" y="120" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Flow_1aibci0_di" bpmnElement="Flow_1aibci0">
+                <di:waypoint x="420" y="120" />
+                <di:waypoint x="560" y="120" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Flow_1vrpna9_di" bpmnElement="Flow_1vrpna9">
+                <di:waypoint x="188" y="120" />
+                <di:waypoint x="320" y="120" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="Flow_0om0jg6_di" bpmnElement="Flow_0om0jg6">
+                <di:waypoint x="940" y="120" />
+                <di:waypoint x="1142" y="120" />
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+                <dc:Bounds x="152" y="102" width="36" height="36" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Activity_01nlb8c_di" bpmnElement="Activity_0vw8zj7">
+                <dc:Bounds x="320" y="80" width="100" height="80" />
+                <bpmndi:BPMNLabel />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Activity_0g8g0x1_di" bpmnElement="Activity_1ufqz5t">
+                <dc:Bounds x="560" y="80" width="100" height="80" />
+                <bpmndi:BPMNLabel />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Event_1xlif2q_di" bpmnElement="Event_1xlif2q">
+                <dc:Bounds x="1142" y="102" width="36" height="36" />
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="Activity_0z19uk2_di" bpmnElement="Activity_1xxhtsu">
+                <dc:Bounds x="840" y="80" width="100" height="80" />
+                <bpmndi:BPMNLabel />
+            </bpmndi:BPMNShape>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn:definitions>
