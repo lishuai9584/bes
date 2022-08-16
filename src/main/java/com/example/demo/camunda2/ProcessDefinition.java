@@ -1,6 +1,5 @@
 package com.example.demo.camunda2;
 
-import lombok.val;
 import org.camunda.bpm.engine.*;
 import org.camunda.bpm.engine.history.HistoricTaskInstance;
 import org.camunda.bpm.engine.impl.persistence.entity.DeploymentEntity;
@@ -12,6 +11,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * 操作流程定义
  */
-@Component
+//@Component
 public class ProcessDefinition implements ApplicationRunner {
 
     /**
@@ -28,19 +28,27 @@ public class ProcessDefinition implements ApplicationRunner {
     @Autowired
     private RepositoryService repositoryService;
 
-    /**操作流程实例接口*/
+    /**
+     * 操作流程实例接口
+     */
     @Autowired
     private RuntimeService runtimeService;
 
-    /**操作操作用户或者组接口*/
+    /**
+     * 操作操作用户或者组接口
+     */
     @Autowired
     private IdentityService identityService;
 
-    /**操作任务接口*/
+    /**
+     * 操作任务接口
+     */
     @Autowired
     private TaskService taskService;
 
-    /**查询历史表相关数据接口*/
+    /**
+     * 查询历史表相关数据接口
+     */
     @Autowired
     private HistoryService historyService;
 
@@ -58,7 +66,7 @@ public class ProcessDefinition implements ApplicationRunner {
         map.put("userTwo", "demo");
         //设置流程发起人
         //identityService.setAuthenticatedUserId("userOne");
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("Process_15vn21w","demo", map);
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("Process_15vn21w", "demo", map);
 
         //查看发起人待办
         List<Task> taskList = taskService.createTaskQuery().processDefinitionKey("Process_15vn21w").taskAssignee("demo").list();
@@ -76,5 +84,19 @@ public class ProcessDefinition implements ApplicationRunner {
 
         //查看用户已办
         List<HistoricTaskInstance> historicTaskInstances = historyService.createHistoricTaskInstanceQuery().taskAssignee("demo").finished().list();
+
+        Map<String, Object> map1 = new HashMap<>();
+        //设置流程发起人
+        identityService.setAuthenticatedUserId("initiator");
+        List<String> userList = new ArrayList<>(4);
+        userList.add("userOne");
+        userList.add("userTwo");
+        userList.add("userThree");
+        map1.put("userList", userList);
+        ProcessInstance processInstance1 = runtimeService.startProcessInstanceByKey("Process_0qzswnr", "demo1", map1);
+
+        String processInstanceId = processInstance1.getProcessInstanceId();
+        System.out.println("1");
+
     }
 }
