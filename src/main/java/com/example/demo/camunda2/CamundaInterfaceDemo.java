@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-import static com.fasterxml.jackson.databind.type.LogicalType.Map;
+//import static com.fasterxml.jackson.databind.type.LogicalType.Map;
 
 public class CamundaInterfaceDemo {
 

@@ -18,8 +18,4 @@ public class DemoApplication {
         SpringApplication.run(DemoApplication.class, args);
     }
 
-/*    private void processPostDeploy(PostDeployEvent event){
-        val processEngine = event.getProcessEngine();
-        runtimeService.startProcessInstanceByKey("Process_1ay9wjv");
-    }*/
 }
